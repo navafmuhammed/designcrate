@@ -10,7 +10,7 @@ const getParsedData = async () => {
 			reader.onload = (event) => {
 				const data = event.target.result;
 				const workbook = XLSX.read(data, { type: 'array' });
-				const sheetName = workbook.SheetNames[0];
+				// const sheetName = workbook.SheetNames[0];
 				const worksheet = workbook.Sheets['All Items'];
 				const rows = XLSX.utils.sheet_to_json(worksheet, { header: 2 });
 				// process the rows here
@@ -99,7 +99,7 @@ function listCategoryItems(category) {
 									</p>
 								</div>
 								<div class="div-block">
-									<a href="#" target="_blank" class="link-block button-link w-inline-block">
+									<a href=${categoryItem.Link} target="_blank" class="link-block button-link w-inline-block">
 										<div class="text-block">Open</div>
 										<img src="images/arrow-right-up-fill.svg" loading="lazy" alt="" class="arrow" />
 									</a>
