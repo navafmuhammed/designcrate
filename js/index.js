@@ -3,7 +3,7 @@ let excelData = null;
 const getParsedData = async () => {
 	const XLSX = await import('https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs');
 
-	fetch('../data.xlsx')
+	fetch('/data.xlsx')
 		.then((response) => response.blob())
 		.then((blob) => {
 			const reader = new FileReader();
