@@ -20,17 +20,15 @@ const getParsedData = async () => {
 					if (data.Categories) categories.add(data.Categories);
 				});
 
-				const firstCategory = categories.values().next().value;
-				window.location.href = `#${firstCategory}`;
-				// if (categories.values()) {
-				// 	let category = window.location.hash.substring(1);
-				// 	if (categories.has(category)) {
-				// 		window.location.href = `#${category}`;
-				// 	} else {
-				// 		const firstCategory = categories.values().next().value;
-				// 		window.location.href = `#${firstCategory}`;
-				// 	}
-				// }
+				if (categories.values()) {
+					let category = window.location.hash.substring(1);
+					if (categories.has(category)) {
+						window.location.href = `#${category}`;
+					} else {
+						const firstCategory = categories.values().next().value;
+						window.location.href = `#${firstCategory}`;
+					}
+				}
 
 				generateCategoryList(categories);
 			};
@@ -49,7 +47,14 @@ function generateCategoryList(categories) {
 
 		let childATag = document.createElement('a');
 
-		childATag.className = 'link-block button-link w-inline-block ';
+		let currentCategory = window.location.hash.substring(1);
+
+		if (currentCategory === category) {
+			childATag.className = 'link-block button-link w-inline-block active';
+			listCategoryItems(category);
+		} else {
+			childATag.className = 'link-block button-link w-inline-block';
+		}
 
 		childATag.setAttribute('href', `#${category}`);
 		childATag.addEventListener('click', function (event) {
@@ -74,13 +79,17 @@ function generateCategoryList(categories) {
 }
 
 window.onhashchange = function () {
-	const categoryInfoListContainer = document.getElementById('categoryInfoListContainer');
-
 	let hashValue = window.location.hash.substring(1); // Get the value of the hash, excluding the "#" symbol
+
+	listCategoryItems(hashValue);
+};
+
+function listCategoryItems(category) {
+	const categoryInfoListContainer = document.getElementById('categoryInfoListContainer');
 
 	categoryInfoListContainer.innerHTML = '';
 	excelData.forEach((categoryItem) => {
-		if (categoryItem.Categories === hashValue) {
+		if (categoryItem.Categories === category) {
 			const cardElement = document.createElement('div');
 			cardElement.className = 'card';
 			cardElement.innerHTML = `<div class="card-margin">
@@ -99,4 +108,4 @@ window.onhashchange = function () {
 			categoryInfoListContainer.appendChild(cardElement);
 		}
 	});
-};
+}
