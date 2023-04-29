@@ -3,6 +3,10 @@ let excelData = null;
 const getParsedData = async () => {
 	const XLSX = await import('https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs');
 
+	let categoryList = document.getElementById('category-container');
+
+	categoryList.innerHTML = '<span class="loader"></span>';
+
 	fetch('/data.xlsx')
 		.then((response) => response.blob())
 		.then((blob) => {
