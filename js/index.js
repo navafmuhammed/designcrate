@@ -3,7 +3,11 @@ let excelData = null;
 const getParsedData = async () => {
 	const XLSX = await import('https://cdn.sheetjs.com/xlsx-0.19.3/package/xlsx.mjs');
 
-	fetch('/data.xlsx')
+	let categoryList = document.getElementById('category-container');
+
+	categoryList.innerHTML = '<span class="loader"></span>';
+
+	fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT1oPygg84-ZGsILPDSUk-CR9ih0m-64PBnA9E-vzWyuPHDM8U9PIhHNoAeifX2f-ghCd6c_B2LKgry/pub?output=xlsx')
 		.then((response) => response.blob())
 		.then((blob) => {
 			const reader = new FileReader();
