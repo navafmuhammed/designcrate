@@ -7,7 +7,7 @@ const getParsedData = async () => {
 
 	categoryList.innerHTML = '<span class="loader"></span>';
 
-	fetch('/data.xlsx')
+	fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vT1oPygg84-ZGsILPDSUk-CR9ih0m-64PBnA9E-vzWyuPHDM8U9PIhHNoAeifX2f-ghCd6c_B2LKgry/pub?output=xlsx')
 		.then((response) => response.blob())
 		.then((blob) => {
 			const reader = new FileReader();
