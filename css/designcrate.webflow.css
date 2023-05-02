@@ -141,6 +141,7 @@
 }
 
 .chips {
+  text-transform: capitalize;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -239,6 +240,7 @@
   }
 
   .filter {
+    flex-wrap: wrap;
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
